@@ -1,0 +1,25 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --color-white: rgb(255, 255, 255);
+  --color-gray: rgb(239, 243, 255);
+  --color-white-blue: rgb(205, 230, 253);
+  --color-light-blue: rgb(114, 150, 213);
+  --color-blue: rgb(42, 58, 104);
+  --color-dark-blue: rgb(4, 16, 50);
+  --color-dark-blue-desabled: rgb(76, 81, 96);
+
+  --color-red-invalid: rgb(255, 116, 97);
+  --color-red-dark-invalid: rgba(255, 116, 97, 0.1);
+  --color-green: rgb(53, 189, 65);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  font-family: 'Montserrat';
+  font-style: normal;
+}
