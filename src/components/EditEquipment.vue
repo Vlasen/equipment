@@ -195,22 +195,18 @@ watch(() => currentEquipmentStore.currentEquipment,
 );
 watch(photosArray, (newValue) => {
   checkError.value = '';
-  isCheckPhotos.value = false;
 
   const hasEmptyFields = newValue.some(photo => photo.trim() === '');
 
   if (hasEmptyFields) {
     checkError.value = 'Введите правильные ссылки на изображения (пустые значения не допускаются)';
-  } else {
-    photosArray.value = [...newValue];
   }
-  if (photosArray.value.length < 1) {
-    isCheckPhotos.value = false;
-  }
+  // if (photosArray.value.length < 1) {
+  //   isCheckPhotos.value = false;
+  // }
 });
 watch(galleryArray.value, (newValue) => {
   checkError.value = '';
-  isCheckPhotos.value = false;
   
   const hasEmptyFields = newValue.some(photo => photo.trim() === '');
 

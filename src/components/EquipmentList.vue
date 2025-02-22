@@ -138,9 +138,11 @@ function mouseLeave(event) {
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   }
   @media (max-width: 1340px) {
+    grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
   @media (max-width: 930px) {
+    grid-template-rows: repeat(auto-fill, 1fr);
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
   @media (max-width: 840px) {
@@ -171,7 +173,7 @@ function mouseLeave(event) {
     min-width: 500px;
     max-width: 600px;
     height: auto;
-    min-height: 200px;
+    max-height: 300px;
     padding-right: 15px;
     box-shadow: 0 0 35px rgb(0, 0, 0, .6);
     @media (max-width: 1786px) {
@@ -186,7 +188,7 @@ function mouseLeave(event) {
     @media (max-width: 1340px) {
       min-width: 300px;
       max-width: 540px;
-      min-height: 189px;
+      min-height: 129px;
       max-height: 195px;
     }
     @media (max-width: 930px) {
