@@ -759,11 +759,14 @@ main {
         border: none;
         cursor: pointer;
         @media (max-width: 787px) {
-          width: 100%;
-        }
-        @media (max-width: 360px) {
-          height: 60px;
-        }
+            width: 220px;
+          }
+          @media (max-width: 637px) {
+            width: 100%;
+          }
+          @media (max-width: 360px) {
+            height: 60px;
+          }
       }
       button:hover {
         background: rgba(4, 16, 50, .8);

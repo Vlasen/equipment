@@ -772,7 +772,7 @@ main {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 260px;
+          width: 350px;
           height: 90px;
           border-radius: 50px;
           background: var(--color-dark-blue);
