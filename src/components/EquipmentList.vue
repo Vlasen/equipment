@@ -36,11 +36,6 @@ const paginatedEquipment = computed(() => {
   return equipmentStore.equipmentList.slice(startIndex, endIndex);
 });
 
-function goToPage (page) {
-  if (page > 0 && page <= totalPages.value) {
-    currentPage.value = page;
-  }
-};
 function nextPage () {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
@@ -91,7 +86,7 @@ function mouseLeave(event) {
       </div>
       <div class="text-info">
         <h1>{{ equipment.title }}</h1>
-        <div class="category-wrapper">
+        <div class="category-wrapper" v-if="equipment.category">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="rgb(114, 150, 213)" d="m12 2l-5.5 9h11zm0 3.84L13.93 9h-3.87zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5s4.5-2.01 4.5-4.5s-2.01-4.5-4.5-4.5m0 7a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5M3 21.5h8v-8H3zm2-6h4v4H5z"/></svg>
           <h3>{{ equipment.category }}</h3>
         </div>
@@ -126,7 +121,7 @@ function mouseLeave(event) {
 .main-list {
   position: relative;
   display: grid;
-  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 60px;
   height: auto;
@@ -175,7 +170,8 @@ function mouseLeave(event) {
     border-radius: 10px;
     min-width: 500px;
     max-width: 600px;
-    min-height: 250px;
+    height: auto;
+    min-height: 200px;
     padding-right: 15px;
     box-shadow: 0 0 35px rgb(0, 0, 0, .6);
     @media (max-width: 1786px) {
@@ -190,7 +186,8 @@ function mouseLeave(event) {
     @media (max-width: 1340px) {
       min-width: 300px;
       max-width: 540px;
-      min-height: 170px;
+      min-height: 189px;
+      max-height: 195px;
     }
     @media (max-width: 930px) {
       min-width: 330px;
@@ -295,6 +292,16 @@ function mouseLeave(event) {
         }
         @media (max-width: 1079px) {
           position: static;
+        }
+        h3 {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          text-overflow: ellipsis;  
+          line-clamp: 1;
+          white-space: normal;
+          word-break: break-all;
         }
         svg {
             width: 24px;

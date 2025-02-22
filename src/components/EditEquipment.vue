@@ -5,13 +5,11 @@ import axios from 'axios'
 import DOMPurify from 'dompurify';
 import { useLoadingStore } from '../stores/loadingCircle';
 import { useCurrentEquipmentStore } from '../stores/currentEquipment';
-import { useEquipmentStore } from '../stores/equipment';
 
 const router = useRouter();
 const route = useRoute();
 
 const currentEquipmentStore = useCurrentEquipmentStore();
-const equipmentStore = useEquipmentStore();
 const loadingStore = useLoadingStore();
 
 const photosArray = ref([]);
@@ -111,6 +109,9 @@ async function putChanges (id) {
   if (photosArray.value.some(item => item === '')){
     photosArray.value = [];
   }
+  if (galleryArray.value.some(item => item === '')){
+    galleryArray.value = [];
+  }
   
   updatedProduct.value = {
     title: dataInput.tittle.value,
@@ -169,14 +170,14 @@ function checkPhotos () {
   isCheckPhotos.value = !isCheckPhotos.value;
 }
 function addField() {
-  photosArray.value.push('');
+  photosArray.value = [...photosArray.value, ''];
 };
 function removePhotoField(index) {
-  photosArray.value.splice(index, 1);
+  photosArray.value = photosArray.value.filter((_, i) => i !== index);
 
 };
 function removeGalleryField(index) {
-  galleryArray.value.splice(index, 1);
+  galleryArray.value = photosArray.value.filter((_, i) => i !== index);
 
 };
 
@@ -192,16 +193,19 @@ watch(() => currentEquipmentStore.currentEquipment,
     }
   }
 );
-watch(photosArray.value, (newValue) => {
+watch(photosArray, (newValue) => {
   checkError.value = '';
   isCheckPhotos.value = false;
-  
+
   const hasEmptyFields = newValue.some(photo => photo.trim() === '');
 
   if (hasEmptyFields) {
     checkError.value = 'Введите правильные ссылки на изображения (пустые значения не допускаются)';
   } else {
-    photosArray.value = newValue;
+    photosArray.value = [...newValue];
+  }
+  if (photosArray.value.length < 1) {
+    isCheckPhotos.value = false;
   }
 });
 watch(galleryArray.value, (newValue) => {
@@ -216,6 +220,7 @@ watch(galleryArray.value, (newValue) => {
     galleryArray.value = newValue;
   }
 });
+
 </script>
 
 <template>
@@ -296,7 +301,6 @@ watch(galleryArray.value, (newValue) => {
             
           </div>
           <div class="info-error">
-            
             <div class="input-invalid">
               {{ checkError }}
             </div>
@@ -315,7 +319,7 @@ watch(galleryArray.value, (newValue) => {
           </div>
         </div>
 
-        <div class="check-container" v-if="isCheckPhotos">
+        <div class="check-container" v-if="isCheckPhotos &&  !photosArray.some(item => item === '') && (galleryArray || photosArray.length > 0)">
           <h1>Проверка фото: </h1>
           
           <div class="photos-for-check" 
