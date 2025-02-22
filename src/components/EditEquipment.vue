@@ -125,7 +125,7 @@ async function putChanges (id) {
   };
 
   try {
-    const response = await axios.put(`https://6712a5e16c5f5ced662443cb.mockapi.io/api/v2/inventories/${id}`,
+    await axios.put(`https://6712a5e16c5f5ced662443cb.mockapi.io/api/v2/inventories/${id}`,
       updatedProduct.value
     );
     successStatus.value = "Данные отправлены!";
@@ -157,12 +157,8 @@ onMounted(async () => {
   const id = route.params.id;
   if (!currentEquipmentStore.currentEquipment.value) {
     await currentEquipmentStore.getCurrentEquipmentById(id);
-    photosArray.value = [
-    ...(currentEquipmentStore.currentEquipment.photos || [])
-    ];
-    galleryArray.value = [
-      ...(currentEquipmentStore.currentEquipment.gallery || [])
-    ];
+    photosArray.value = currentEquipmentStore.currentEquipment.photos ? currentEquipmentStore.currentEquipment.photos : [];
+    galleryArray.value = currentEquipmentStore.currentEquipment.gallery ? currentEquipmentStore.currentEquipment.gallery : [];
   }
 });
 
@@ -201,9 +197,6 @@ watch(photosArray, (newValue) => {
   if (hasEmptyFields) {
     checkError.value = 'Введите правильные ссылки на изображения (пустые значения не допускаются)';
   }
-  // if (photosArray.value.length < 1) {
-  //   isCheckPhotos.value = false;
-  // }
 });
 watch(galleryArray.value, (newValue) => {
   checkError.value = '';
@@ -535,7 +528,7 @@ main {
             @media (max-width: 1366px) {
               height: 140px;
             }
-            @media (max-width: 360px) {
+            @media (max-width: 624px) {
               font-size: 16px;
               line-height: 24px;
             }
