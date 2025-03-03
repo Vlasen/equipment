@@ -20,6 +20,7 @@ const isCheckPhotos = ref(false);
 const checkError = ref("");
 const successStatus = ref("");
 const updatedProduct = ref({});
+const isTouched = ref(false);
   
 const dataInput = reactive({
   tittle: {
@@ -225,7 +226,8 @@ watch(galleryArray.value, (newValue) => {
             class="textarea-wrapper">
             <textarea 
               v-model="data.value" 
-              placeholder="Введите описание">
+              placeholder="Введите описание"
+              @input="isTouched = true">
             </textarea>
             
             <div class="info-error">
@@ -233,7 +235,7 @@ watch(galleryArray.value, (newValue) => {
                 {{ data.error }}
               </div>
               <h3
-                :class="{'input-invalid' : data.value && data.value.length > 255}"
+                :class="{'input-invalid' : isTouched && (data.value && data.value.length > 255 || data.value.length === 0)}"
               >
                 {{ data.value? data.value.length : 0 }}/255
               </h3>
@@ -415,7 +417,6 @@ main {
       
       width: min(100%, 1600px);
       height: auto;
-      max-height: max(80vh, 680px);
       min-height: fit-content;
       padding: 60px 90px;
       gap: 30px;
@@ -558,14 +559,25 @@ main {
             flex-direction: row;
             justify-content: space-between;
             align-items: flex-start;
+            h3 {
+              padding: 0 24px;
+            }
             .input-invalid {
               padding: 0 24px;
               font-weight: 400;
-              font-size: 18px;
-              line-height: 28px;
+              font-size: 24px;
+              line-height: 32px;
               color: var(--color-red-invalid) !important;
-              @media (max-width: 360px) {
+              @media (max-width: 1786px) {
+                font-size: 20px;
+              }
+              @media (max-width: 1340px) {
                 font-size: 16px;
+                line-height: 24px;
+              }
+              @media (max-width: 360px) {
+                font-size: 12px;
+                line-height: 20px;
               }
             }
           }

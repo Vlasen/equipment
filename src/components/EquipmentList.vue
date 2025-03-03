@@ -121,7 +121,7 @@ function mouseLeave(event) {
 .main-list {
   position: relative;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-auto-rows: min-content;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 60px;
   height: auto;
@@ -138,11 +138,9 @@ function mouseLeave(event) {
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   }
   @media (max-width: 1340px) {
-    grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
   @media (max-width: 930px) {
-    grid-template-rows: repeat(auto-fill, 1fr);
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
   @media (max-width: 840px) {
@@ -172,7 +170,7 @@ function mouseLeave(event) {
     border-radius: 10px;
     min-width: 500px;
     max-width: 600px;
-    height: auto;
+    height: 100%;
     max-height: 300px;
     padding-right: 15px;
     box-shadow: 0 0 35px rgb(0, 0, 0, .6);
@@ -284,6 +282,7 @@ function mouseLeave(event) {
         align-items: center;
         gap: 10px;
         margin-top: 15px;
+        width: auto;
         @media (max-width: 1786px) {
           margin-top: 5px;
         }
@@ -291,6 +290,7 @@ function mouseLeave(event) {
           position: absolute;
           bottom: 18px;
           left: -65%;
+          width: 120px;
         }
         @media (max-width: 1079px) {
           position: static;
@@ -315,7 +315,6 @@ function mouseLeave(event) {
         }
       }
     }
-
   }
   .pagination {
     grid-column: -1 / 1;
@@ -323,7 +322,7 @@ function mouseLeave(event) {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: auto;
+    height: 80px;
     gap: 20px;
     button {
       display: flex;

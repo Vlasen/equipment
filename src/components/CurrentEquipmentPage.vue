@@ -33,6 +33,10 @@ watch(() => currentEquipmentStore.currentEquipment,
 
 onMounted(async () => {
   const id = route.params.id;
+  if (!id || typeof id !== 'string' || id.includes('%')) {
+    console.error('Некорректный ID:', id);
+    return;
+  }
   if (!currentEquipmentStore.currentEquipment.value) {
     await currentEquipmentStore.getCurrentEquipmentById(id);
   } else {
@@ -198,7 +202,6 @@ function editEquipment (id) {
       
       width: min(100%, 1600px);
       height: auto;
-      max-height: max(80vh, 680px);
       min-height: fit-content;
       padding: 50px 40px;
       gap: 30px;
